@@ -23,3 +23,19 @@ npm run dev
 # Build for production in the dist/ directory
 npm run build
 ```
+
+
+## Solution - Points to Consider
+
+1) Material Types Matter (?) 
+
+ThreeJS batches material types together when rendering. So for (yellow / blue / red) planes make them all the same material (ie 'MeshPhysicalMaterial') to avoid any issues behind the scenes there. This might apply to groups as well, which is something to consider if you're using groups (untested yet) 
+
+2) depthWrite: true/false
+
+depthWrite determines whether an object writes to the depth buffer, which is of course important for rendering other objects behind transparent objects. So for transparent materials - disable it (so objects can be drawn behind them). For opaque materials - enable it (so objects aren't drawn accidentally on top)
+
+3) transparent: true
+
+This just needs to be true for the transparent materials. 
+Set to false for the opaque material (it will mess things up if its true on the opaque red material)
